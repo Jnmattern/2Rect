@@ -37,22 +37,22 @@ Animation *anim = NULL;
 char buffer[256] = "";
 
 GRect rects[11][2] = {
-  { { { 17, 17 }, { 38, 50 } }, { { 17, 17 }, { 38, 50 } } },  // 0
-  { { {  0,  0 }, { 38, 84 } }, { { 55,  0 }, { 17, 84 } } },  // 1
-  { { {  0, 17 }, { 55, 17 } }, { { 17, 50 }, { 55, 17 } } },  // 2
-  { { {  0, 17 }, { 55, 17 } }, { {  0, 50 }, { 55, 17 } } },  // 3
-  { { { 17,  0 }, { 38, 50 } }, { {  0, 67 }, { 17, 55 } } },  // 4
-  { { { 17, 17 }, { 55, 17 } }, { {  0, 50 }, { 55, 17 } } },  // 5
-  { { { 17, 17 }, { 55, 17 } }, { { 17, 50 }, { 38, 17 } } },  // 6
-  { { {  0, 17 }, { 55, 33 } }, { {  0, 50 }, { 55, 34 } } },  // 7
-  { { { 17, 17 }, { 38, 17 } }, { { 17, 50 }, { 38, 17 } } },  // 8
-  { { { 17, 17 }, { 38, 17 } }, { {  0, 50 }, { 55, 17 } } },  // 9
-  { { {  0,  0 }, { 72, 34 } }, { {  0, 34 }, { 72, 50 } } }  // 10
+  { { { 17, 16 }, { 34, 48 } }, { { 17, 16 }, { 34, 48 } } },  // 0
+  { { {  0,  0 }, { 34, 80 } }, { { 51,  0 }, { 17, 80 } } },  // 1
+  { { {  0, 16 }, { 51, 16 } }, { { 17, 48 }, { 51, 16 } } },  // 2
+  { { {  0, 16 }, { 51, 16 } }, { {  0, 48 }, { 51, 16 } } },  // 3
+  { { { 17,  0 }, { 34, 48 } }, { {  0, 64 }, { 51, 16 } } },  // 4
+  { { { 17, 16 }, { 51, 16 } }, { {  0, 48 }, { 51, 16 } } },  // 5
+  { { { 17, 16 }, { 51, 16 } }, { { 17, 48 }, { 34, 16 } } },  // 6
+  { { {  0, 16 }, { 51, 32 } }, { {  0, 48 }, { 51, 32 } } },  // 7
+  { { { 17, 16 }, { 34, 16 } }, { { 17, 48 }, { 34, 16 } } },  // 8
+  { { { 17, 16 }, { 34, 16 } }, { {  0, 48 }, { 51, 16 } } },  // 9
+  { { {  0,  0 }, { 68, 32 } }, { {  0, 32 }, { 68, 48 } } }  // 10
 };
 
 
 GRect slotFrame(int i) {
-  return GRect(72*(i%2), 84*(i>>1), 72, 84);
+  return GRect(2+72*(i%2), 2+84*(i>>1), 68, 80);
 }
 
 digitSlot *findSlot(Layer *layer) {
@@ -68,7 +68,7 @@ digitSlot *findSlot(Layer *layer) {
 
 void updateMainLayer(Layer *layer, GContext *ctx) {
   GRect bounds = layer_get_bounds(layer);
-  graphics_context_set_fill_color(ctx, fgColor);
+  graphics_context_set_fill_color(ctx, bgColor);
   graphics_fill_rect(ctx, GRect(0, 0, bounds.size.w, bounds.size.h), 0, GCornerNone);
 }
 
@@ -105,6 +105,10 @@ void updateSlot(Layer *layer, GContext *ctx) {
     r[0] = rects[slot->curDigit][0];
     r[1] = rects[slot->curDigit][1];
   }
+
+  GRect bounds = layer_get_bounds(layer);
+  graphics_context_set_fill_color(ctx, fgColor);
+  graphics_fill_rect(ctx, GRect(0, 0, bounds.size.w, bounds.size.h), 0, GCornerNone);
 
 #ifdef PBL_COLOR
   graphics_context_set_fill_color(ctx, bgColor);
