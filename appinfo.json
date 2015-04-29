@@ -1,0 +1,33 @@
+{
+  "uuid": "c6e591fa-4c31-4ef8-87a0-d9f685b50e5b",
+  "shortName": "2Rect",
+  "longName": "2Rect",
+  "companyName": "Jnm",
+  "versionCode": 1,
+  "versionLabel": "1.0",
+  "watchapp": {
+    "watchface": true
+  },
+  "capabilities": [
+    "configurable"
+  ],
+  "appKeys": {
+    "bgcolor": 1,
+    "fgcolor": 2
+  },
+  "resources": {
+    "media": [
+      {
+        "menuIcon": true,
+        "type": "png",
+        "name": "IMAGE_MENU_ICON",
+        "file": "images/menu_icon.png"
+      }
+    ]
+  },
+  "targetPlatforms": [
+    "aplite",
+    "basalt"
+  ],
+  "sdkVersion": "3"
+}
