@@ -317,12 +317,11 @@ void in_received_handler(DictionaryIterator *received, void *context) {
   Tuple *fgColorTuple = dict_find(received, CONFIG_KEY_FGCOLOR);
 
   if (bgColorTuple && fgColorTuple) {
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "Received config:");
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "  bgColor=%s, fgColor=%s",
-            (char *)bgColorTuple->value->cstring, (char *)fgColorTuple->value->cstring);
-
     bgColorChanged = checkAndSaveString(bgColorText, bgColorTuple->value->cstring, CONFIG_KEY_BGCOLOR);
     fgColorChanged = checkAndSaveString(fgColorText, fgColorTuple->value->cstring, CONFIG_KEY_FGCOLOR);
+
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Received config:");
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "  bgColor=%s, fgColor=%s", bgColorText, fgColorText);
 
     if (bgColorChanged) {
       bgColor = setColorFromText(bgColorText);

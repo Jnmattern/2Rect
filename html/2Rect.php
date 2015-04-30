@@ -51,15 +51,24 @@
 
   <script>
 <?php
-  if (!isset($_GET['return_to'])) {
-    echo 'var closeURL = "pebblejs://close#";';
+  if (isset($_GET['return_to'])) {
+    echo "var closeURL = \"" . $_GET['return_to'] . "\";\n";
   } else {
-    echo 'var closeURL = "' . $_GET['return_to'] . '";';
+    echo "var closeURL = \"pebblejs://close#\";\n";
+  }
+
+  if (isset($_GET['bgcolor'])) {
+    echo "var curBGColor = \"" . $_GET['bgcolor'] . "\";\n";
+  } else {
+    echo "var curBGColor = \"#ffffff\";\n";
+  }
+
+  if (isset($_GET['fgcolor'])) {
+    echo "var curFGColor = \"" . $_GET['fgcolor'] . "\";\n";
+  } else {
+    echo "var curFGColor = \"#000000\";\n";
   }
 ?>
-
-      var curBGColor = "#ffffff";
-      var curFGColor = "#000000";
 
       function setBGColor(color) {
         curBGColor = color.toHexString();
@@ -89,7 +98,6 @@
 ?>
             showPaletteOnly: true,
             hideAfterPaletteSelect:true,
-            preferredFormat: "hex3",
             change: function(color) {
               setBGColor(color);
             },
@@ -108,14 +116,13 @@
         $("#fgcolorpicker").spectrum({
 <?php
   if (!isset($_GET['fgcolor'])) {
-    echo "              color: \"#000\",\n";
+    echo "              color: \"#000000\",\n";
   } else {
     echo "              color: \"" . $_GET['fgcolor'] . "\",\n" ;
   }
 ?>
             showPaletteOnly: true,
             hideAfterPaletteSelect:true,
-            preferredFormat: "hex3",
             change: function(color) {
               setFGColor(color);
             },
